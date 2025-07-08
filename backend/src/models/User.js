@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema({
     name: {
       type: String,
       required: true,
-      trim: true,  
+      trim: true,
     },
     username: {
         type: String,
@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
         lowercase: true,
         unique: true
     },
-    passwordHash: {
+    password: {
         type: String,
         required: true
     },
@@ -28,4 +28,5 @@ const UserSchema = new mongoose.Schema({
     timestamps: true,
 })
 
-export default mongoose.model('User', UserSchema)
+export const User = mongoose.model('User', UserSchema)
+

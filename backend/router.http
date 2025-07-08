@@ -1,0 +1,10 @@
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+
+{
+    "name": "caio",
+    "username": "devVine",
+    "email": "vine@gmail.com",
+    "password": "28292425",
+    "passwordConfirme": "28292425"
+}
