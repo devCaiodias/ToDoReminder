@@ -1,5 +1,5 @@
 import configEnv from '../config/config.js'
-import {User} from '../models/User.js'
+import User from '../models/User.js'
 import bcrypt  from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
@@ -73,7 +73,7 @@ class AuthController {
 
     static async checkAuth(req, res){
         try {
-            const user = await User.findById(req.userid).select('-password')
+            const user = await User.findById(req.userId).select('-password')
 
             if (!user) {
                 return res.status(401).json({msg: 'Usuario não encontrado'})

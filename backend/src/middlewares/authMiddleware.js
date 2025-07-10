@@ -11,7 +11,7 @@ export function authenticateJWT(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, configEnv.SECRET);
-    req.userid = decoded.id;
+    req.userId = decoded.id;
     next();
   } catch (err) {
     return res.status(401).json({ message: 'Token inválido ou expirado' });
