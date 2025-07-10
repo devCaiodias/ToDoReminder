@@ -38,40 +38,66 @@ class AuthController {
     static async login(req, res) {
         const {username, password} = req.body
 
+        // Validação
+        if (!username) {
+            res.status(422).json({message: 'Campo username obrigatorio!'})
+        }
+
+        if (!password) {
+            res.status(422).json({message: 'Campo password obrigatorio!'})
+        }
+
         try {
-            Validação
-            if (!username) {
-                res.status(422).json({message: 'Campo username obrigatorio!'})
-            }
-
-            if (!password) {
-                res.status(422).json({message: 'Campo password obrigatorio!'})
-            }
-
-            
             const user = await User.findOne({username: username})
             
-            if (!user) {
-                return res.status(422).json({msg: "Usuario n exite"})
+            if (!user || !(await bcrypt.compare(password, user.password))) {
+                return res.status(401).json({msg: "Credenciais Invalidas "})
             }
             
-            const checkPassword = await bcrypt.compare(password, user.password)
-            
-            if (!checkPassword) {
-                return res.status(422).json({msg: "Senha Invalida!"})
-            }
-        
-            const secret = configEnv.SECRET
+           const token = jwt.sign({id: user._id}, configEnv.SECRET, {
+                expiresIn: '7d',
+           })
 
-            const token = jwt.sign({
-                id: user.id
-            }, secret)
+           res.cookie('token', token, {
+                httpOnly: true,
+                secure: false,
+                sameSite: 'lax',
+                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 dias
+            });
 
-            return res.status(200).json({msg: "User logado!", token})
+            res.json({ message: 'Login realizado com sucesso!', Token: token ,Usuario: user });
         } catch (error) {
             return res.status(500).json({Error: error})
         }
     }
+
+    static async checkAuth(req, res){
+        try {
+            const user = await User.findById(req.userid).select('-password')
+
+            if (!user) {
+                return res.status(401).json({msg: 'Usuario não encontrado'})
+            }
+
+            return res.json({
+                isAuthenticated: true,
+                user,
+            })
+        } catch (error) {
+             return res.status(500).json({ message: 'Erro interno', error });
+        }
+    }
+
+    static async logout(_req, res) {
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+        });
+
+        res.json({ message: 'Logout realizado com sucesso!' });
+    }
+    
     
 }
 
