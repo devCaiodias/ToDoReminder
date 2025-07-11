@@ -61,11 +61,44 @@ class TasksControllers {
           status
         })
         
-        return res.status(204).json({msg: "Tasks atualizada com sucesso", tasksUpdate})
+        res.json({msg: "Tasks atualizada com sucesso", tasksUpdate})
         
       } catch (error) {
         return res.status(500).json({Err: error})
       }
+    }
+
+    static async deleteTasks(req, res) {
+      try {
+        const { id } = req.params;
+
+        // Busca a task pelo ID
+        const taskId = await tasks.findById(id);
+
+        if (!taskId) {
+            return res.status(404).json({ msg: 'Tarefa não encontrada' });
+        }
+
+        // Verifica se o usuário logado é o dono da task
+        if (taskId.userId.toString() !== req.userId) {
+            return res.status(403).json({ msg: 'Acesso negado' });
+        }
+
+        // Remove a task
+        const taskDeletada = await tasks.findByIdAndDelete(id);
+
+        // Remove o ID da task do array de tasks do usuário
+        await User.findByIdAndUpdate(req.userId, {
+        $pull: { tasks: taskDeletada._id },
+      });
+
+        res.json({ msg: 'Tarefa deletada com sucesso' });
+
+    } catch (error) {
+        console.error('Erro ao deletar a tarefa:', error);
+        res.status(500).json({ msg: 'Erro ao deletar a tarefa', error: error.message });
+    }
+        
     }
 }
 
