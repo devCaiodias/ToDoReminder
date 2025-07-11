@@ -7,6 +7,7 @@ routes.use(authenticateJWT)
 
 routes.get("/tasks/list", TasksControllers.listTasks)
 routes.post("/tasks/createTasks", TasksControllers.createTasks)
+routes.put("/tasks/updateTasks/:id", TasksControllers.updateTasks)
 
 
 

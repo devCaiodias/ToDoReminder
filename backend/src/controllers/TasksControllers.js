@@ -14,7 +14,7 @@ class TasksControllers {
     }
 
     static async createTasks(req, res) {
-         try {
+      try {
       const { title, description, dueDate, category, status } = req.body;
 
       // Validação básica
@@ -42,6 +42,30 @@ class TasksControllers {
       console.error('Erro ao criar a tarefa:', err);
       return res.status(500).json({ msg: "Erro ao criar a tarefa!", error: err.message });
     }
+    }
+
+    static async updateTasks(req, res) {
+      try {
+        
+        const {title, description, category, status } = req.body;
+        const tasksId = req.params.id
+        
+        if(!title || !description || !category || !status) {
+          return res.status(400).json({msg: "Campos obrigatorios estao faltando."})
+        }
+        
+        const tasksUpdate = await tasks.findByIdAndUpdate(tasksId, { 
+          title,
+          description,
+          category,
+          status
+        })
+        
+        return res.status(204).json({msg: "Tasks atualizada com sucesso", tasksUpdate})
+        
+      } catch (error) {
+        return res.status(500).json({Err: error})
+      }
     }
 }
 
