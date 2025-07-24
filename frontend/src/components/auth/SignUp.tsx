@@ -1,39 +1,31 @@
-
-// const SignUpSchema = z.object({
-//     name: z.string({
-//         error: 'Name is required'
-//     }),
-//     username: z.string({
-//         error: "Username is required"
-//     }),
-//     email: z.string({
-//         error: "Email is required"
-//     }).email({
-//         message: "Must be valid email"
-//     }),
-//     password: z.string({
-//         error: "Password is required"
-//     }).min(6, {
-//         message: "Password must have at least 6 characters"
-//     }).max(12, {
-//         message: "Password must have at least 12 characters"
-//     }),
-//     passwordConfirme: z.string({
-//         error: "PasswordConfirme is required"
-//     }),
-// })
-
+'use client';
 import Link from "next/link";
+import * as z from "zod"
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+
+const SignUpSchema = z.object({
+    name: z.string().min(1, "Name is required"),
+    username: z.string().min(1, "Username is required"),
+    email: z.string().email("Invalid email address"),
+    password: z.string().min(6, "Password must be at least 6 characters long")
+})
+
 
 export default function SignUpForm() {
-    // const form = useForm<z.infer<typeof SignUpSchema>>({
-    //     resolver: zodResolver(SignUpSchema),
-    //     defaultValues: {
-    //         email: "",
-    //         password: "",
 
-    //     }
-    // })
+    const router = useRouter()
+
+    const form = useForm<z.infer<typeof SignUpSchema>>({
+        resolver: zodResolver(SignUpSchema),
+        defaultValues: {
+            name: "",
+            username: "",
+            email: "",
+            password: ""
+        }
+    })
 
     return (
         <>
@@ -69,6 +61,13 @@ export default function SignUpForm() {
                         <input
                             type="password"
                             placeholder="🔑 Password"
+                            className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                        />
+                    </div>
+                    <div>
+                        <input
+                            type="password"
+                            placeholder="🔑 Password Confirme"
                             className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
                         />
                     </div>
