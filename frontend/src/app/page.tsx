@@ -1,8 +1,9 @@
+import SignUp from "@/components/auth/SignUp";
 
 export default function Home() {
   return (
     <>
-      <h1>Hello word</h1>
+      <SignUp /> 
     </>
   );
 }
