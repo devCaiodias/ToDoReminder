@@ -4,16 +4,17 @@ import * as z from "zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 
 const SignUpSchema = z.object({
     name: z.string().min(1, "Name is required"),
     username: z.string().min(1, "Username is required"),
     email: z.string().email("Invalid email address"),
     password: z.string().min(6, "Password must be at least 6 characters long"),
-    confirmPassword: z.string().min(6, "Confirm your password"),
-}).refine((data) => data.password === data.confirmPassword, {
+    passwordConfirme: z.string().min(6, "Confirm your password"),
+}).refine((data) => data.password === data.passwordConfirme, {
     message: "Passwords do not match",
-    path: ["confirmPassword"],
+    path: ["passwordConfirme"],
 });
 
 export default function SignUpForm() {
@@ -31,16 +32,23 @@ export default function SignUpForm() {
             username: "",
             email: "",
             password: "",
-            confirmPassword: ""
+            passwordConfirme: ""
         }
     });
 
-    const onSubmit = (data: z.infer<typeof SignUpSchema>) => {
-        console.log(data); 
-        reset(); // Reseta o formulário após o envio
+    const onSubmit = async (data: z.infer<typeof SignUpSchema>) => {
+        try {
+            const res = await axios.post("http://localhost:8080/auth/register", data, {
+                withCredentials: true,
+            })
 
-        // aqui você pode redirecionar ou fazer requisição
-        // router.push('/somepage')
+            console.log(res.data);
+            reset();
+
+            router.push("/LogIn");
+        } catch (err: any) {
+            console.error("Error ao registrar:", err.response?.data || err.message);
+        }
     };
 
     return (
@@ -92,12 +100,12 @@ export default function SignUpForm() {
 
                 <div>
                     <input
-                        {...register("confirmPassword")}
+                        {...register("passwordConfirme")}
                         type="password"
                         placeholder="🔑 Confirm Password"
                         className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
                     />
-                    {errors.confirmPassword && <p className="text-red-500 text-sm ml-4">{errors.confirmPassword.message}</p>}
+                    {errors.passwordConfirme && <p className="text-red-500 text-sm ml-4">{errors.passwordConfirme.message}</p>}
                 </div>
 
                 <div className="flex flex-col items-center space-y-4 mt-8">
