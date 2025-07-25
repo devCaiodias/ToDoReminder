@@ -1,80 +1,106 @@
 'use client';
 import Link from "next/link";
-import * as z from "zod"
+import * as z from "zod";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const SignUpSchema = z.object({
     name: z.string().min(1, "Name is required"),
     username: z.string().min(1, "Username is required"),
     email: z.string().email("Invalid email address"),
-    password: z.string().min(6, "Password must be at least 6 characters long")
-})
-
+    password: z.string().min(6, "Password must be at least 6 characters long"),
+    confirmPassword: z.string().min(6, "Confirm your password"),
+}).refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+});
 
 export default function SignUpForm() {
+    const router = useRouter();
 
-    const router = useRouter()
-
-    const form = useForm<z.infer<typeof SignUpSchema>>({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm<z.infer<typeof SignUpSchema>>({
         resolver: zodResolver(SignUpSchema),
         defaultValues: {
             name: "",
             username: "",
             email: "",
-            password: ""
+            password: "",
+            confirmPassword: ""
         }
-    })
+    });
+
+    const onSubmit = (data: z.infer<typeof SignUpSchema>) => {
+        console.log(data); 
+        reset(); // Reseta o formulário após o envio
+
+        // aqui você pode redirecionar ou fazer requisição
+        // router.push('/somepage')
+    };
 
     return (
-        <>
-            {/* Formulário */}
-            <div className="w-1/2 flex flex-col justify-center p-8 bg-white rounded-bl-[100px] rounded-tl-[100px]">
-                <div className='inline-block mb-8'>
-                    <h2 className="text-7xl font-bold mx-28 my-12">Sign up</h2>
+        <div className="w-1/2 flex flex-col justify-center p-8 bg-white rounded-bl-[100px] rounded-tl-[100px]">
+            <div className='inline-block mb-8'>
+                <h2 className="text-7xl font-bold mx-28 my-12">Sign up</h2>
+            </div>
+
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-auto mx-28">
+                <div>
+                    <input
+                        {...register("name")}
+                        type="text"
+                        placeholder="🧑🏻 Name"
+                        className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                    />
+                    {errors.name && <p className="text-red-500 text-sm ml-4">{errors.name.message}</p>}
                 </div>
 
-                <form className="space-y-4 w-auto mx-28">
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="🧑🏻 Name"
-                            className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="👤 Username"
-                            className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="email"
-                            placeholder="📧 Email"
-                            className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="password"
-                            placeholder="🔑 Password"
-                            className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="password"
-                            placeholder="🔑 Password Confirme"
-                            className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
-                        />
-                    </div>
+                <div>
+                    <input
+                        {...register("username")}
+                        type="text"
+                        placeholder="👤 Username"
+                        className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                    />
+                    {errors.username && <p className="text-red-500 text-sm ml-4">{errors.username.message}</p>}
+                </div>
 
-                </form>
+                <div>
+                    <input
+                        {...register("email")}
+                        type="email"
+                        placeholder="📧 Email"
+                        className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                    />
+                    {errors.email && <p className="text-red-500 text-sm ml-4">{errors.email.message}</p>}
+                </div>
+
+                <div>
+                    <input
+                        {...register("password")}
+                        type="password"
+                        placeholder="🔑 Password"
+                        className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                    />
+                    {errors.password && <p className="text-red-500 text-sm ml-4">{errors.password.message}</p>}
+                </div>
+
+                <div>
+                    <input
+                        {...register("confirmPassword")}
+                        type="password"
+                        placeholder="🔑 Confirm Password"
+                        className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                    />
+                    {errors.confirmPassword && <p className="text-red-500 text-sm ml-4">{errors.confirmPassword.message}</p>}
+                </div>
+
                 <div className="flex flex-col items-center space-y-4 mt-8">
-
                     <button
                         type="submit"
                         className="w-80 bg-black text-white py-3 rounded-full font-semibold"
@@ -82,15 +108,11 @@ export default function SignUpForm() {
                         Sign up
                     </button>
 
-                    <button
-                        type="button"
-                        className="w-80 cursor-pointer bg-gray-100 text-black py-3 rounded-full font-semibold"
-                    >
-                        <Link href="/LogIn">Log in</Link>
-                    </button>
+                    <Link href="/LogIn" className="w-80 text-center bg-gray-100 text-black py-3 rounded-full font-semibold">
+                        Log in
+                    </Link>
                 </div>
-            </div>
-        </>
-    )
+            </form>
+        </div>
+    );
 }
-
