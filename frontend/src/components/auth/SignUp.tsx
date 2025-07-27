@@ -4,7 +4,7 @@ import * as z from "zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const SignUpSchema = z.object({
     name: z.string().min(1, "Name is required"),
@@ -46,8 +46,9 @@ export default function SignUpForm() {
             reset();
 
             router.push("/LogIn");
-        } catch (err: any) {
-            console.error("Error ao registrar:", err.response?.data || err.message);
+        } catch (err) {
+            const error = err as AxiosError;
+            console.error("Error ao registrar:", error.response?.data || error.message);
         }
     };
 

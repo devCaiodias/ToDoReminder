@@ -4,6 +4,7 @@ import * as z from "zod"
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios, { AxiosError } from "axios";
 
 const LogInSchema = z.object({
     username: z.string().min(1, "Username is required"),
@@ -27,12 +28,22 @@ export default function LogInForm() {
         }
     })
 
-    const onSubmit = (data: z.infer<typeof LogInSchema>) => {
-        console.log(data);
-        reset(); // Reseta o formulário após o envio
+    const onSubmit = async (data: z.infer<typeof LogInSchema>) => {
+        try {
+            const res = await axios.post("http://localhost:8080/auth/login", data, {
+                withCredentials: true,
+            })
 
-        // aqui você pode redirecionar ou fazer requisição
-        // router.push('/somepage')
+            console.log(res.data)
+            reset()
+
+            router.push("/Tasks")
+            localStorage.setItem('token', res.data.token);
+        } catch (err) {
+            const error = err as AxiosError
+
+            console.error("Error ao fazer login: ", error.response?.data || error.message)
+        }
     }
 
     return (
