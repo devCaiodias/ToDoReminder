@@ -33,8 +33,6 @@ export default function LogInForm() {
             const res = await axios.post("http://localhost:8080/auth/login", data, {
                 withCredentials: true,
             })
-
-            console.log(res.data)
             reset()
 
             router.push("/Tasks")

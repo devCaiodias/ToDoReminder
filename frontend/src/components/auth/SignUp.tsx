@@ -38,11 +38,10 @@ export default function SignUpForm() {
 
     const onSubmit = async (data: z.infer<typeof SignUpSchema>) => {
         try {
-            const res = await axios.post("http://localhost:8080/auth/register", data, {
+            await axios.post("http://localhost:8080/auth/register", data, {
                 withCredentials: true,
             })
 
-            console.log(res.data);
             reset();
 
             router.push("/LogIn");
