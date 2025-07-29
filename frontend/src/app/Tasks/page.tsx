@@ -2,10 +2,11 @@
 import { useEffect } from 'react';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 
 export default function Tasks() {
-    
+
     const router = useRouter();
 
     useEffect(() => {
@@ -18,9 +19,9 @@ export default function Tasks() {
     async function Logout() {
         try {
             await axios.post("http://localhost:8080/auth/logout", {}, { withCredentials: true });
-            
+
             router.push("/LogIn")
-            
+
         } catch (err) {
             const error = err as AxiosError;
             console.error("Error ao logout ", error.response?.data || error.message)
@@ -28,11 +29,76 @@ export default function Tasks() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-            <h1 className="text-4xl font-bold mb-8">Tasks Page</h1>
-            <p className="text-lg">This is the tasks page content.</p>
+        <>
+            <div className='flex items-center justify-between'>
+                <h1 className='font-extrabold text-3xl m-8 ml-20'>Tasks</h1>
 
-            <button type="submit" onClick={Logout} className='bg-amber-300 text-black p-5 my-4 cursor-pointer rounded-3xl'>Logout</button>
-        </div>
+                <div className='flex items-center justify-between gap-4 m-8'>
+                    <Button className='rounded-full bg-white text-black hover:bg-[#f1f1f1] p-6' onClick={Logout}>Logout</Button>
+                    <Button className='rounded-full bg-white text-black hover:bg-[#f1f1f1] p-6' onClick={() => router.push('/CreateTask')}>Create Task</Button>
+
+                </div>
+            </div>
+
+            <header className='grid sm:grid-cols-2 md:grid-cols-3 grid-cols-1 gap-7 p-4 rounded-lg m-8'   >
+                <div className='flex flex-col justify-center gap-4 bg-white p-4 rounded-lg shadow-md'>
+                    <div className='flex items-center justify-between p-1'>
+                        <h2 className='text-3xl font-bold'>Title</h2>
+                        <Button variant="link" className='text-[#38b6ff]'>Edit tasks</Button>
+                    </div>
+                    <p className='text-center font-fira font-bold'>status</p>
+                    <div className='bg-[#f1f1f1] rounded-4xl'>
+                        <div>
+                            <p className='text-center p-8'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex pariatur quibusdam molestiae, fuga, id rerum voluptate quae minus consectetur labore nihil voluptates ipsa natus alias mollitia sequi nemo accusamus eligendi.</p>
+                        </div>
+                        <div className='flex items-center justify-between gap-4 p-4'>
+                            <Button className='rounded-full bg-white text-black hover:bg-[#f1f1f1] p-6'>category</Button>
+                            <Button className='rounded-full bg-white text-black hover:bg-[#f1f1f1] p-6'>25/08/2025 00:00</Button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div className='flex flex-col justify-center gap-4 bg-white p-4 rounded-lg shadow-md'>
+                    <div className='flex items-center justify-between p-1'>
+                        <h2 className='text-3xl font-bold'>Title</h2>
+                        <Button variant="link" className='text-[#38b6ff]'>Edit tasks</Button>
+                    </div>
+                    <p className='text-center font-fira font-bold'>status</p>
+                    <div className='bg-[#f1f1f1] rounded-4xl'>
+                        <div>
+                            <p className='text-center p-8'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex pariatur quibusdam molestiae, fuga, id rerum voluptate quae minus consectetur labore nihil voluptates ipsa natus alias mollitia sequi nemo accusamus eligendi.</p>
+                        </div>
+                        <div className='flex items-center justify-between gap-4 p-4'>
+                            <Button className='rounded-full bg-white text-black hover:bg-[#f1f1f1] p-6'>category</Button>
+                            <Button className='rounded-full bg-white text-black hover:bg-[#f1f1f1] p-6'>25/08/2025 00:00</Button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div className='flex flex-col justify-center gap-4 bg-white p-4 rounded-lg shadow-md'>
+                    <div className='flex items-center justify-between p-1'>
+                        <h2 className='text-3xl font-bold'>Title</h2>
+                        <Button variant="link" className='text-[#38b6ff]'>Edit tasks</Button>
+                    </div>
+                    <p className='text-center font-fira font-bold'>status</p>
+                    <div className='bg-[#f1f1f1] rounded-4xl'>
+                        <div>
+                            <p className='text-center p-8'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex pariatur quibusdam molestiae, fuga, id rerum voluptate quae minus consectetur labore nihil voluptates ipsa natus alias mollitia sequi nemo accusamus eligendi.</p>
+                        </div>
+                        <div className='flex items-center justify-between gap-4 p-4'>
+                            <Button className='rounded-full bg-white text-black hover:bg-[#f1f1f1] p-6'>category</Button>
+                            <Button className='rounded-full bg-white text-black hover:bg-[#f1f1f1] p-6'>25/08/2025 00:00</Button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </header>
+        </>
     )
 }
