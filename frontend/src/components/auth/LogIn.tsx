@@ -30,13 +30,11 @@ export default function LogInForm() {
 
     const onSubmit = async (data: z.infer<typeof LogInSchema>) => {
         try {
-            const res = await axios.post("http://localhost:8080/auth/login", data, {
+            const response = await axios.post("http://localhost:8080/auth/login", data, {
                 withCredentials: true,
             })
             reset()
-
             router.push("/Tasks")
-            localStorage.setItem('token', res.data.token);
         } catch (err) {
             const error = err as AxiosError
 

@@ -20,7 +20,7 @@ const app = express()
 
 // ✅ CORS PRIMEIRO
 app.use(cors({
-    origin: configEnv.CLIENT_URL, // 'http://localhost:3000'
+    origin: configEnv.CLIENT_URL, // 'http://localhost:3000/'
     credentials: true,            // Permitir cookies
 }));
 

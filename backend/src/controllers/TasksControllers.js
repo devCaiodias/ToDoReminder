@@ -3,9 +3,9 @@ import User from '../models/User.js'
 
 class TasksControllers {
 
-    static async listTasks(_req, res) {
+    static async listTasks(req, res) {
         try {
-            const tasksc = await tasks.find({})
+            const tasksc = await tasks.find({ userId: req.userId });
             
             return res.json(tasksc)
         } catch (err) {

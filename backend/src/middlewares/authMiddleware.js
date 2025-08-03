@@ -1,9 +1,8 @@
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 import configEnv from '../config/config.js';
 
 export function authenticateJWT(req, res, next) {
-
-    const token = req.cookies?.token;
+  const token = req.cookies?.token;
 
   if (!token) {
     return res.status(401).json({ message: 'Token ausente' });
@@ -16,5 +15,4 @@ export function authenticateJWT(req, res, next) {
   } catch (err) {
     return res.status(401).json({ message: 'Token inválido ou expirado' });
   }
-
 }
