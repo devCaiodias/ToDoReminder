@@ -5,6 +5,7 @@ import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import CreateTasks from '@/components/componenstTasks/create_Tasks';
+import EditTasks from '@/components/componenstTasks/EditTasks';
 
 interface Task {
     _id: string;
@@ -19,17 +20,17 @@ export default function Tasks() {
     const router = useRouter();
     const [tasks, setTasks] = useState<Task[]>([]);
 
+    const fetchData = async () => {
+        try {
+            await axios.get('http://localhost:8080/check-auth', { withCredentials: true });
+            const res = await axios.get('http://localhost:8080/tasks/list', { withCredentials: true });
+            setTasks(res.data);
+        } catch (err) {
+            console.error('Erro de autenticação ou busca de tarefas', err);
+            router.push('/LogIn');
+        }
+    };
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                await axios.get('http://localhost:8080/check-auth', { withCredentials: true });
-                const res = await axios.get('http://localhost:8080/tasks/list', { withCredentials: true });
-                setTasks(res.data);
-            } catch (err) {
-                console.error('Erro de autenticação ou busca de tarefas', err);
-                router.push('/LogIn');
-            }
-        };
 
         fetchData();
     }, []);
@@ -59,7 +60,7 @@ export default function Tasks() {
                     <article key={task._id} className='flex flex-col justify-center gap-4 bg-white p-4 rounded-lg shadow-md'>
                         <div className='flex items-center justify-between p-1'>
                             <h2 className='text-3xl font-bold'>{task.title}</h2>
-                            <Button variant="link" className='text-[#38b6ff]'>Editar</Button>
+                            <EditTasks task={task} onTaskUpdated={fetchData} />
                         </div>
                         <p className='text-center font-bold uppercase'>{task.status}</p>
                         <div className='bg-[#f1f1f1] rounded-4xl'>
