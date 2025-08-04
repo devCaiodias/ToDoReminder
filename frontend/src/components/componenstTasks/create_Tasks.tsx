@@ -5,12 +5,13 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import { Button } from "../ui/button";
 import axios from "axios";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Textarea } from "../ui/textarea";
 
 interface CreateTasksProps {
-  onTaskCreated: () => void;
+    onTaskCreated: () => void;
 }
 
-export default function CreateTasks({onTaskCreated}: CreateTasksProps) {
+export default function CreateTasks({ onTaskCreated }: CreateTasksProps) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [dueDate, setDueDate] = useState('');
@@ -67,12 +68,12 @@ export default function CreateTasks({onTaskCreated}: CreateTasksProps) {
                             onChange={(e) => setTitle(e.target.value)}
                             className="w-full p-3 rounded-full bg-gray-100 focus:outline-none m-3"
                         />
-                        <input
-                            type="text"
-                            placeholder="Description"
+                        <Textarea
+                            id="description"
+                            placeholder="description"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            className="w-full p-3 rounded-full bg-gray-100 focus:outline-none m-3"
+                            className="col-span-2 h-8"
                         />
                         <input
                             type="datetime-local"

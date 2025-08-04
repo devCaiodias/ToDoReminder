@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import CreateTasks from '@/components/componenstTasks/create_Tasks';
 import EditTasks from '@/components/componenstTasks/EditTasks';
+import DeleteTask from '@/components/componenstTasks/DeleteTask';
 
 interface Task {
     _id: string;
@@ -55,16 +56,20 @@ export default function Tasks() {
                 </div>
             </div>
 
-            <section className='grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-7 p-4 rounded-lg m-8'>
+            <section className='grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-7 p-4 rounded-lg m-8 sm:mx-20'>
                 {tasks.map((task) => (
                     <article key={task._id} className='flex flex-col justify-center gap-4 bg-white p-4 rounded-lg shadow-md'>
                         <div className='flex items-center justify-between p-1'>
                             <h2 className='sm:text-3xl font-bold sm:w-3xs truncate max-w-[200px]'>{task.title}</h2>
+                            <div>
                             <EditTasks task={task} onTaskUpdated={fetchData} />
+                            <DeleteTask task={task} onTaskDelete={fetchData} />
+
+                            </div>
                         </div>
                         <p className='text-center font-bold uppercase'>{task.status}</p>
                         <div className='bg-[#f1f1f1] rounded-4xl'>
-                            <p className='text-center p-8'>{task.description}</p>
+                            <p className='text-center p-8 break-words w-full'>{task.description}</p>
                             <div className='flex items-center justify-between gap-4 p-4'>
                                 <Button className='rounded-full bg-white text-black hover:bg-[#f1f1f1] p-6'>
                                     {task.category}
