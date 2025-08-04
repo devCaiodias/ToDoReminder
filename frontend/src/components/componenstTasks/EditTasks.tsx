@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectGroup, SelectItem,SelectTrigger, SelectValue } from "../ui/select";
 
 interface TasksProps {
     task: {
@@ -30,8 +31,8 @@ export default function EditTasks({ task, onTaskUpdated }: TasksProps) {
 
     async function handleUpdateTasks() {
         try {
-            await axios.put(`http://localhost:8080/tasks/updateTasks/${task._id}`, 
-                { title, description, dueDate, status, category }, 
+            await axios.put(`http://localhost:8080/tasks/updateTasks/${task._id}`,
+                { title, description, dueDate, status, category },
                 { withCredentials: true })
             onTaskUpdated();
         } catch (error) {
@@ -82,13 +83,17 @@ export default function EditTasks({ task, onTaskUpdated }: TasksProps) {
                             </div>
                             <div className="grid grid-cols-3 items-center gap-4">
                                 <Label htmlFor="status">status</Label>
-                                <Input
-                                    id="status"
-                                    placeholder="status"
-                                    value={status}
-                                    onChange={(e) => setStatus(e.target.value)}
-                                    className="col-span-2 h-8"
-                                />
+                                <Select value={status} onValueChange={setStatus}>
+                                    <SelectTrigger className="w-[180px]">
+                                        <SelectValue placeholder="status" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectGroup>
+                                            <SelectItem value="pending">pending</SelectItem>
+                                            <SelectItem value="completed">completed</SelectItem>
+                                        </SelectGroup>
+                                    </SelectContent>
+                                </Select>
                             </div>
                             <div className="grid grid-cols-3 items-center gap-4">
                                 <Label htmlFor="category">category</Label>

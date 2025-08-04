@@ -4,8 +4,13 @@ import { useState } from "react"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from "../ui/button";
 import axios from "axios";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
-export default function CreateTasks() {
+interface CreateTasksProps {
+  onTaskCreated: () => void;
+}
+
+export default function CreateTasks({onTaskCreated}: CreateTasksProps) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [dueDate, setDueDate] = useState('');
@@ -31,14 +36,14 @@ export default function CreateTasks() {
             }, {
                 withCredentials: true
             });
-
-            console.log('Tarefa criada:', res.data);
-            // opcional: limpar campos após sucesso
+            onTaskCreated();
             setTitle('');
             setDescription('');
             setDueDate('');
             setCategory('');
             setStatus('');
+
+
         } catch (error) {
             console.error('Erro ao criar tarefa:', error);
         }
@@ -82,13 +87,17 @@ export default function CreateTasks() {
                             onChange={(e) => setCategory(e.target.value)}
                             className="w-full p-3 rounded-full bg-gray-100 focus:outline-none m-3"
                         />
-                        <input
-                            type="text"
-                            placeholder="Status"
-                            value={status}
-                            onChange={(e) => setStatus(e.target.value)}
-                            className="w-full p-3 rounded-full bg-gray-100 focus:outline-none m-3"
-                        />
+                        <Select value={status} onValueChange={setStatus} >
+                            <SelectTrigger className="w-full p-4 rounded-full bg-gray-100 focus:outline-none m-3">
+                                <SelectValue placeholder="status" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    <SelectItem value="pending">pending</SelectItem>
+                                    <SelectItem value="completed">completed</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
 
                         <button
                             type="button"

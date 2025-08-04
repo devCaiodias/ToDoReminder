@@ -45,12 +45,12 @@ export default function LogInForm() {
     return (
         <>
             {/* Formulário */}
-            <div className="w-1/2 flex flex-col justify-center p-8 bg-white rounded-bl-[100px] rounded-tl-[100px]">
-                <div className='inline-block mb-8'>
-                    <h2 className="text-7xl font-bold mx-28 my-12">Log in</h2>
+            <div className="w-full sm:w-1/2 flex flex-col justify-center h-screen sm:p-8 bg-white sm:rounded-bl-[100px] sm:rounded-tl-[100px]">
+                <div className='inline-block sm:mb-8'>
+                    <h2 className="text-center sm:inline text-7xl sm:text-7xl font-bold sm:mx-28 mb-14">Log in</h2>
                 </div>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-auto mx-28">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:w-auto sm:mx-28 sm:mt-10 flex flex-col justify-center items-center sm:block">
                     <div>
                         <input
                             {...login("username")}
@@ -74,14 +74,14 @@ export default function LogInForm() {
 
                         <button
                             type="submit"
-                            className="w-80 bg-black text-white py-3 rounded-full font-semibold"
+                            className="w-64 sm:w-80 bg-black text-white py-3 rounded-full font-semibold"
                         >
                             Log in
                         </button>
 
                         <button
                             type="button"
-                            className="w-80 bg-gray-100 text-black py-3 rounded-full font-semibold"
+                            className="w-64 sm:w-80 text-center bg-gray-100 text-black py-3 rounded-full font-semibold"
                         >
                             <Link href="/SignUp">Sign up</Link>
                         </button>
