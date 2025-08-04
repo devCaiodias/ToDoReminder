@@ -52,12 +52,12 @@ export default function SignUpForm() {
     };
 
     return (
-        <div className="w-1/2 flex flex-col justify-center p-8 bg-white rounded-bl-[100px] rounded-tl-[100px]">
-            <div className='inline-block mb-8'>
-                <h2 className="text-7xl font-bold mx-28 my-12">Sign up</h2>
+        <div className="w-full sm:w-1/2 flex flex-col sm:justify-center sm:p-8 bg-white sm:rounded-bl-[100px] sm:rounded-tl-[100px]">
+            <div className='inline-block sm:mb-8'>
+                <h2 className="text-center sm:inline text-5xl sm:text-7xl font-bold sm:mx-28 my-10">Sign up</h2>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-auto mx-28">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:w-auto sm:mx-28 sm:mt-10 flex flex-col justify-center items-center sm:block">
                 <div>
                     <input
                         {...register("name")}
@@ -83,7 +83,7 @@ export default function SignUpForm() {
                         {...register("email")}
                         type="email"
                         placeholder="📧 Email"
-                        className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                        className="sm:w-full p-3 rounded-full bg-gray-100 focus:outline-none"
                     />
                     {errors.email && <p className="text-red-500 text-sm ml-4">{errors.email.message}</p>}
                 </div>
@@ -93,7 +93,7 @@ export default function SignUpForm() {
                         {...register("password")}
                         type="password"
                         placeholder="🔑 Password"
-                        className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                        className="sm:w-full p-3 rounded-full bg-gray-100 focus:outline-none"
                     />
                     {errors.password && <p className="text-red-500 text-sm ml-4">{errors.password.message}</p>}
                 </div>
@@ -103,7 +103,7 @@ export default function SignUpForm() {
                         {...register("passwordConfirme")}
                         type="password"
                         placeholder="🔑 Confirm Password"
-                        className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                        className="sm:w-full p-3 rounded-full bg-gray-100 focus:outline-none"
                     />
                     {errors.passwordConfirme && <p className="text-red-500 text-sm ml-4">{errors.passwordConfirme.message}</p>}
                 </div>
@@ -111,12 +111,12 @@ export default function SignUpForm() {
                 <div className="flex flex-col items-center space-y-4 mt-8">
                     <button
                         type="submit"
-                        className="w-80 bg-black text-white py-3 rounded-full font-semibold"
+                        className="w-64 sm:w-80 bg-black text-white py-3 rounded-full font-semibold"
                     >
                         Sign up
                     </button>
 
-                    <Link href="/LogIn" className="w-80 text-center bg-gray-100 text-black py-3 rounded-full font-semibold">
+                    <Link href="/LogIn" className="w-64 sm:w-80 text-center bg-gray-100 text-black py-3 rounded-full font-semibold">
                         Log in
                     </Link>
                 </div>
