@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
+import Swal from "sweetalert2";
 
 const LogInSchema = z.object({
     username: z.string().min(1, "Username is required"),
@@ -33,12 +34,23 @@ export default function LogInForm() {
             await axios.post("http://localhost:8080/auth/login", data, {
                 withCredentials: true,
             })
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Login with success",
+                showConfirmButton: false,
+                timer: 1500
+            });
             reset()
             router.push("/Tasks")
-        } catch (err) {
-            const error = err as AxiosError
 
-            console.error("Error ao fazer login: ", error.response?.data || error.message)
+        } catch (err) {
+            Swal.fire({
+                title: "Error ao fazer login",
+                icon: "error",
+                timer: 1500,
+                draggable: true
+            });
         }
     }
 

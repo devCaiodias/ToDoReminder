@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import axios from "axios";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Textarea } from "../ui/textarea";
+import Swal from "sweetalert2";
 
 interface CreateTasksProps {
     onTaskCreated: () => void;
@@ -17,6 +18,8 @@ export default function CreateTasks({ onTaskCreated }: CreateTasksProps) {
     const [dueDate, setDueDate] = useState('');
     const [category, setCategory] = useState('');
     const [status, setStatus] = useState('');
+
+    const [open, setOpen] = useState(false);
 
     const handleCreateTasks = async () => {
         const token = localStorage.getItem('token');
@@ -43,17 +46,30 @@ export default function CreateTasks({ onTaskCreated }: CreateTasksProps) {
             setDueDate('');
             setCategory('');
             setStatus('');
+            setOpen(false);
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Task Created",
+                showConfirmButton: false,
+                timer: 1500
+            });
 
 
         } catch (error) {
-            console.error('Erro ao criar tarefa:', error);
+            Swal.fire({
+                title: "Erro ao criar tarefa",
+                icon: "error",
+                timer: 1500,
+                draggable: true
+            });
         }
     };
 
     return (
-        <Sheet>
-            <SheetTrigger>
-                <Button className='rounded-full bg-white text-black hover:bg-[#f1f1f1] p-6'>
+        <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+                <Button variant="outline" className='rounded-full bg-white text-black hover:bg-[#f1f1f1] p-6'>
                     Create Task
                 </Button>
             </SheetTrigger>

@@ -6,7 +6,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectGroup, SelectItem,SelectTrigger, SelectValue } from "../ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import Swal from "sweetalert2";
 
 interface TasksProps {
     task: {
@@ -35,8 +36,19 @@ export default function EditTasks({ task, onTaskUpdated }: TasksProps) {
                 { title, description, dueDate, status, category },
                 { withCredentials: true })
             onTaskUpdated();
+            Swal.fire({
+                title: "Tasks Updated",
+                icon: "success",
+                timer: 1500,
+                draggable: true
+            });
         } catch (error) {
-            console.error("Erro ao atualizar a tarefa", error);
+            Swal.fire({
+                title: "Erro ao atualizar a tarefa",
+                icon: "error",
+                timer: 1500,
+                draggable: true
+            });
         }
     }
     return (

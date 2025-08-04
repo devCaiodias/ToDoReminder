@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
+import Swal from "sweetalert2";
 
 const SignUpSchema = z.object({
     name: z.string().min(1, "Name is required"),
@@ -41,12 +42,22 @@ export default function SignUpForm() {
             await axios.post("http://localhost:8080/auth/register", data, {
                 withCredentials: true,
             })
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Sig up with success",
+                showConfirmButton: false,
+                timer: 1500
+            });
             reset();
-
             router.push("/LogIn");
         } catch (err) {
-            const error = err as AxiosError;
-            console.error("Error ao registrar:", error.response?.data || error.message);
+            Swal.fire({
+                title: "Error ao registrar",
+                icon: "error",
+                timer: 1500,
+                draggable: true
+            });
         }
     };
 
