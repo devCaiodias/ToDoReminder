@@ -27,7 +27,7 @@ export default function CreateTasks({onTaskCreated}: CreateTasksProps) {
         }
 
         try {
-            const res = await axios.post('http://localhost:8080/tasks/createTasks', {
+            await axios.post('http://localhost:8080/tasks/createTasks', {
                 title,
                 description,
                 dueDate,

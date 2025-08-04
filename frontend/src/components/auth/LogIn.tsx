@@ -30,7 +30,7 @@ export default function LogInForm() {
 
     const onSubmit = async (data: z.infer<typeof LogInSchema>) => {
         try {
-            const response = await axios.post("http://localhost:8080/auth/login", data, {
+            await axios.post("http://localhost:8080/auth/login", data, {
                 withCredentials: true,
             })
             reset()

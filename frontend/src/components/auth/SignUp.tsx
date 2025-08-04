@@ -41,7 +41,6 @@ export default function SignUpForm() {
             await axios.post("http://localhost:8080/auth/register", data, {
                 withCredentials: true,
             })
-
             reset();
 
             router.push("/LogIn");
