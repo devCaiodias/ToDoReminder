@@ -31,7 +31,7 @@ export default function CreateTasks({ onTaskCreated }: CreateTasksProps) {
         }
 
         try {
-            await axios.post('http://localhost:8080/tasks/createTasks', {
+            await axios.post('https://todoreminder-3hsg.onrender.com/tasks/createTasks', {
                 title,
                 description,
                 dueDate,

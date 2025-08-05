@@ -14,7 +14,7 @@ export default function DeleteTask({ task, onTaskDelete }: TasksProps) {
 
     async function handleDelete() {
         try {
-            await axios.delete(`http://localhost:8080/tasks/deleteTasks/${task._id}`,
+            await axios.delete(`https://todoreminder-3hsg.onrender.com/tasks/deleteTasks/${task._id}`,
                 { withCredentials: true })
             onTaskDelete();
             Swal.fire({

@@ -32,7 +32,7 @@ export default function EditTasks({ task, onTaskUpdated }: TasksProps) {
 
     async function handleUpdateTasks() {
         try {
-            await axios.put(`http://localhost:8080/tasks/updateTasks/${task._id}`,
+            await axios.put(`https://todoreminder-3hsg.onrender.com/tasks/updateTasks/${task._id}`,
                 { title, description, dueDate, status, category },
                 { withCredentials: true })
             onTaskUpdated();
