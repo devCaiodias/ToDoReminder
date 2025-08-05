@@ -1,6 +1,6 @@
 # ✅ ToDo Reminder – App de Lista de Tarefas com Lembretes
 
-ToDo Reminder é uma aplicação full stack desenvolvida com **Node.js (Express)** no backend e **Next.js** no frontend. Permite que usuários cadastrem tarefas, definam lembretes e recebam notificações por email antes do prazo.
+ToDo Reminder é uma aplicação full stack desenvolvida com **Node.js (Express)** no backend e **Next.js** no frontend. Permite que usuários cadastrem tarefas.
 
 ---
 
