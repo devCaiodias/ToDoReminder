@@ -19,7 +19,7 @@ const app = express()
 
 // ✅ CORS PRIMEIRO
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://to-do-reminder-fipx.vercel.app'],
+    origin: ['http://localhost:3000', 'https://to-do-reminder-phi.vercel.app'],
     credentials: true,
 }));
 
