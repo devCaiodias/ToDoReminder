@@ -69,11 +69,11 @@ export default function CreateTasks({ onTaskCreated }: CreateTasksProps) {
     return (
         <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-                <Button variant="outline" className='rounded-full bg-white text-black hover:bg-[#f1f1f1] p-6'>
+                <Button className='rounded-full bg-white text-black hover:bg-[#f1f1f1] p-6'>
                     Create Task
                 </Button>
             </SheetTrigger>
-            <SheetContent className='w-[400px] sm:w-[540px] h-[500px] rounded-3xl mr-2 mt-2'>
+            <SheetContent className='w-[400px] sm:w-[540px] h-[500px] rounded-3xl mt-2'>
                 <SheetHeader>
                     <SheetTitle className='text-4xl'>Create Task</SheetTitle>
                     <SheetDescription className='p-6 flex flex-col items-center justify-center'>
