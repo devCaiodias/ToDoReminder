@@ -17,14 +17,9 @@ db.once('open', () => {
 
 const app = express()
 
-const allowedOrigins = [
-  'http://localhost:3000',
-  'https://to-do-reminder-fipx.vercel.app/' // substitua pelo seu domínio do frontend em produção, se tiver
-];
-
 // ✅ CORS PRIMEIRO
 app.use(cors({
-    origin: allowedOrigins,
+    origin: ['http://localhost:3000', 'https://to-do-reminder-fipx.vercel.app'],
     credentials: true,
 }));
 
