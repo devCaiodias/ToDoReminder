@@ -35,8 +35,7 @@ ToDo Reminder é uma aplicação full stack desenvolvida com **Node.js (Express)
 ## 🧪 Requisitos
 
 - Node.js v18+  
-- MongoDB local ou Atlas  
-- Conta de email (para testes com Nodemailer, use Gmail ou Mailtrap)
+- MongoDB local ou Atlas
 
 ---
 
@@ -59,8 +58,6 @@ npm install
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/todo_reminder
 JWT_SECRET=sua_chave_jwt
-EMAIL_USER=seuemail@gmail.com
-EMAIL_PASS=sua_senha_de_app
 ```
 
 ### Inicie o backend:
