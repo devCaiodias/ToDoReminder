@@ -23,8 +23,8 @@ export default function Tasks() {
 
     const fetchData = async () => {
         try {
-            await axios.get('http://localhost:8080/check-auth', { withCredentials: true });
-            const res = await axios.get('http://localhost:8080/tasks/list', { withCredentials: true });
+            await axios.get('https://todoreminder-3hsg.onrender.com/check-auth', { withCredentials: true });
+            const res = await axios.get('https://todoreminder-3hsg.onrender.com/tasks/list', { withCredentials: true });
             setTasks(res.data);
         } catch (err) {
             console.error('Erro de autenticação ou busca de tarefas', err);
@@ -38,7 +38,7 @@ export default function Tasks() {
 
     async function Logout() {
         try {
-            await axios.post("http://localhost:8080/auth/logout", {}, { withCredentials: true });
+            await axios.post("https://todoreminder-3hsg.onrender.com/auth/logout", {}, { withCredentials: true });
             router.push("/LogIn");
         } catch (err) {
             const error = err as AxiosError;

@@ -39,7 +39,7 @@ export default function SignUpForm() {
 
     const onSubmit = async (data: z.infer<typeof SignUpSchema>) => {
         try {
-            await axios.post("http://localhost:8080/auth/register", data, {
+            await axios.post("https://todoreminder-3hsg.onrender.com/auth/register", data, {
                 withCredentials: true,
             })
             Swal.fire({

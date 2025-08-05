@@ -31,7 +31,7 @@ export default function LogInForm() {
 
     const onSubmit = async (data: z.infer<typeof LogInSchema>) => {
         try {
-            await axios.post("http://localhost:8080/auth/login", data, {
+            await axios.post("https://todoreminder-3hsg.onrender.com/auth/login", data, {
                 withCredentials: true,
             })
             Swal.fire({

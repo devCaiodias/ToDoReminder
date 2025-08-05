@@ -3,7 +3,6 @@ import router from './routes/index.js';
 import connect from './db/dbconnect.js';
 import helmet from 'helmet';
 import cors from 'cors';
-import configEnv from './config/config.js';
 
 
 const db = await connect()
@@ -18,9 +17,14 @@ db.once('open', () => {
 
 const app = express()
 
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://to-do-reminder-fipx.vercel.app/' // substitua pelo seu domínio do frontend em produção, se tiver
+];
+
 // ✅ CORS PRIMEIRO
 app.use(cors({
-    origin: configEnv.CLIENT_URL,
+    origin: allowedOrigins,
     credentials: true,
 }));
 
