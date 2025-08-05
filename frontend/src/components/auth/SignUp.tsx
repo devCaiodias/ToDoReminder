@@ -62,18 +62,19 @@ export default function SignUpForm() {
     };
 
     return (
-        <div className="w-full sm:w-1/2 flex flex-col sm:justify-center sm:p-8 bg-white sm:rounded-bl-[100px] sm:rounded-tl-[100px]">
-            <div className='inline-block sm:mb-8'>
-                <h2 className="text-center sm:inline text-5xl sm:text-7xl font-bold sm:mx-28 my-10">Sign up</h2>
+        <div className="w-full xl:w-1/2 flex flex-col xl:justify-center xl:p-8 bg-white xl:rounded-bl-[100px] xl:rounded-tl-[100px]">
+            <div className="m-auto">
+            <div className='xl:flex xl:items-center xl:justify-center'>
+                <h2 className="text-center xl:inline text-6xl xl:text-7xl font-bold xl:mx-28 my-10">Sign up</h2>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:w-auto sm:mx-28 sm:mt-10 flex flex-col justify-center items-center sm:block">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 xl:w-auto xl:mx-28 xl:mt-10 flex flex-col justify-center items-center xl:inline">
                 <div>
                     <input
                         {...register("name")}
                         type="text"
                         placeholder="🧑🏻 Name"
-                        className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                        className="xl:w-full sm:w-80 p-3 rounded-full bg-gray-100 focus:outline-none"
                     />
                     {errors.name && <p className="text-red-500 text-sm ml-4">{errors.name.message}</p>}
                 </div>
@@ -83,7 +84,7 @@ export default function SignUpForm() {
                         {...register("username")}
                         type="text"
                         placeholder="👤 Username"
-                        className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                        className="xl:w-full sm:w-80 p-3 rounded-full bg-gray-100 focus:outline-none"
                     />
                     {errors.username && <p className="text-red-500 text-sm ml-4">{errors.username.message}</p>}
                 </div>
@@ -93,7 +94,7 @@ export default function SignUpForm() {
                         {...register("email")}
                         type="email"
                         placeholder="📧 Email"
-                        className="sm:w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                        className="xl:w-full sm:w-80 p-3 rounded-full bg-gray-100 focus:outline-none"
                     />
                     {errors.email && <p className="text-red-500 text-sm ml-4">{errors.email.message}</p>}
                 </div>
@@ -103,7 +104,7 @@ export default function SignUpForm() {
                         {...register("password")}
                         type="password"
                         placeholder="🔑 Password"
-                        className="sm:w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                        className="xl:w-full sm:w-80 p-3 rounded-full bg-gray-100 focus:outline-none"
                     />
                     {errors.password && <p className="text-red-500 text-sm ml-4">{errors.password.message}</p>}
                 </div>
@@ -113,7 +114,7 @@ export default function SignUpForm() {
                         {...register("passwordConfirme")}
                         type="password"
                         placeholder="🔑 Confirm Password"
-                        className="sm:w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                        className="xl:w-full sm:w-80 p-3 rounded-full bg-gray-100 focus:outline-none"
                     />
                     {errors.passwordConfirme && <p className="text-red-500 text-sm ml-4">{errors.passwordConfirme.message}</p>}
                 </div>
@@ -131,6 +132,7 @@ export default function SignUpForm() {
                     </Link>
                 </div>
             </form>
+            </div>
         </div>
     );
 }

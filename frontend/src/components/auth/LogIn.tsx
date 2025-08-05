@@ -57,18 +57,19 @@ export default function LogInForm() {
     return (
         <>
             {/* Formulário */}
-            <div className="w-full sm:w-1/2 flex flex-col justify-center h-screen sm:p-8 bg-white sm:rounded-bl-[100px] sm:rounded-tl-[100px]">
-                <div className='inline-block sm:mb-8'>
-                    <h2 className="text-center sm:inline text-7xl sm:text-7xl font-bold sm:mx-28 mb-14">Log in</h2>
+            <div className="w-full xl:w-1/2 flex flex-col xl:justify-center xl:p-8 bg-white xl:rounded-bl-[100px] xl:rounded-tl-[100px]">
+                <div className="m-auto">
+                <div className='xl:flex xl:items-center xl:justify-center'>
+                    <h2 className="text-center xl:inline text-6xl xl:text-7xl font-bold xl:mx-28 my-10">Log in</h2>
                 </div>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:w-auto sm:mx-28 sm:mt-10 flex flex-col justify-center items-center sm:block">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 xl:w-auto xl:mx-28 xl:mt-10 flex flex-col justify-center items-center xl:inline">
                     <div>
                         <input
                             {...login("username")}
                             type="text"
                             placeholder="👤 Username"
-                            className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                            className="xl:w-full sm:w-80 p-3 rounded-full bg-gray-100 focus:outline-none"
                         />
                         {errors.username && <p className="text-red-500 text-sm ml-4">{errors.username.message}</p>}
                     </div>
@@ -77,7 +78,7 @@ export default function LogInForm() {
                             {...login("password")}
                             type="password"
                             placeholder="🔑 Password"
-                            className="w-full p-3 rounded-full bg-gray-100 focus:outline-none"
+                            className="xl:w-full sm:w-80 p-3 rounded-full bg-gray-100 focus:outline-none"
                         />
                         {errors.password && <p className="text-red-500 text-sm ml-4">{errors.password.message}</p>}
                     </div>
@@ -99,6 +100,7 @@ export default function LogInForm() {
                         </button>
                     </div>
                 </form>
+                </div>
             </div>
         </>
     )

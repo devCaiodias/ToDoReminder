@@ -4,10 +4,10 @@ import SignUpForm from "@/components/auth/SignUp";
 export default function SignUp() {
 
     return (
-        <div className="sm:min-h-[997px] h-screen flex bg-none sm:bg-[url('/branco.gif')] sm:bg-cover">
+        <div className="min-h-screen flex md:bg-none xl:bg-[url('/branco.gif')] md:bg-cover">
 
-            <div className="sm:w-1/2 sm:flex sm:flex-col sm:justify-end sm:rounded-4xl">
-                <div className="hidden sm:block absolute text-white text-6xl font-bold p-5 ">
+            <div className="xl:w-1/2 xl:flex xl:flex-col xl:justify-end xl:rounded-4xl">
+                <div className="hidden xl:block absolute text-white text-6xl font-bold p-5 ">
                     Welcome !!
                 </div>
             </div>
