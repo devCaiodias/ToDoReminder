@@ -11,8 +11,6 @@ ToDo Reminder é uma aplicação full stack desenvolvida com **Node.js (Express)
 - MongoDB + Mongoose
 - JWT para autenticação
 - Bcrypt para hash de senha
-- Node-Cron para agendar lembretes
-- Nodemailer para envio de emails
 - Dotenv, Helmet, CORS
 
 ### Frontend (Next.js + Tailwind + ShadCN UI)
@@ -27,11 +25,9 @@ ToDo Reminder é uma aplicação full stack desenvolvida com **Node.js (Express)
 ## 🔐 Funcionalidades
 
 - Cadastro e login com JWT  
-- Login com **e-mail ou nome de usuário**  
+- Login com **usuário**  
 - CRUD de tarefas (criar, editar, excluir, listar)  
-- Organização por status e categorias  
-- Definição de data/hora para lembrete  
-- Envio automático de email antes da tarefa vencer  
+- Organização por status e categorias 
 - UI responsiva e acessível  
 
 ---
