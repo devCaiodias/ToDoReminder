@@ -22,13 +22,6 @@ export default function CreateTasks({ onTaskCreated }: CreateTasksProps) {
     const [open, setOpen] = useState(false);
 
     const handleCreateTasks = async () => {
-        const token = localStorage.getItem('token');
-        console.log(token)
-
-        if (!token || token === 'undefined') {
-            console.error('Token inválido. Faça login novamente.');
-            return;
-        }
 
         try {
             await axios.post('https://todoreminder-3hsg.onrender.com/tasks/createTasks', {
